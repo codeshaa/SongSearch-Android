@@ -22,30 +22,34 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
-    <TextView
+    <EditText
         android:layout_width="@dimen/textSearchWidth"
         android:layout_height="@dimen/textSearchHeight"
         android:hint="@string/search_hint"
-        android:textSize="23dp"
-        android:textAlignment="center"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:scrollHorizontally="true"
+        android:background="@null"
+        android:textSize="15dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/textViewSearch" />
+        android:id="@+id/editTextSearch" />
 
     <ImageButton
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
         android:layout_marginLeft="5dp"
         android:background="@color/colorPrimaryDark"
         app:srcCompat="@android:drawable/ic_menu_search"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/textViewSearch"
+        android:layout_toRightOf="@+id/editTextSearch"
         android:id="@+id/btnSearch" />
 
     <ListView
-        android:id="@+id/listview_search"
+        android:id="@+id/listViewSearch"
+        android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
@@ -53,5 +57,16 @@
         android:layout_marginTop="5dp"
         android:dividerHeight="1dp"
         android:divider="#FFFFFF"/>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/btnSearch"
+        android:layout_toStartOf="@+id/btnSearch"
+        android:layout_marginRight="18dp"
+        android:layout_marginEnd="18dp"
+        android:id="@+id/progressBar" />
 
 </RelativeLayout>
