@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="1"
+    android:id="@+id/songItem"
+    android:orientation="horizontal">
+
+
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="#287019"
+        android:id="@+id/btnPlay"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:text="@string/button_play"
+        android:elevation="3dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="7dp"
+        android:maxLines="3"
+        android:textAlignment="textStart"
+        android:layout_gravity="start"
+        android:id="@+id/textSongTitle"
+        android:layout_weight="0.9"
+        android:layout_marginLeft="7dp"
+        android:fontFamily="sans-serif" />
+
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="#287019"
+        android:id="@+id/btnDownload"
+        android:text="@string/button_download"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:elevation="3dp" />
+</LinearLayout>
