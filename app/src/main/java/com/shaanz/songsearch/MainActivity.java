@@ -54,12 +54,14 @@ public class MainActivity extends AppCompatActivity {
         progressBar.setVisibility(View.INVISIBLE);
         mediaPlayer = new MediaPlayer();
 
+        // serch button listener
         searchButton.setOnClickListener(
                 new View.OnClickListener()
                 {
                     public void onClick(View view)
                     {
 
+                        // hide keyboard when not focus on input
                         if (view != null) {
                             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
@@ -67,13 +69,21 @@ public class MainActivity extends AppCompatActivity {
 
                         if (isOnline()) {
 
-                            try {
-                                uri = "https://www.googleapis.com/youtube/v3/search?q="+ URLEncoder.encode(searchText.getText().toString(), "UTF-8")+"&part=snippet&type=video&maxResults=7&key="+KEY;
-                            } catch (UnsupportedEncodingException e) {
-                                e.printStackTrace();
+                            // creating URI string
+                            if (searchText.getText() != null) {
+                                try {
+                                    uri = "https://www.googleapis.com/youtube/v3/search?q=" + URLEncoder.encode(searchText.getText().toString(), "UTF-8") + "&part=snippet&type=video&maxResults=20&key=" + KEY;
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
+
+                                // new Async task execute
+                                SongTask songTask = new SongTask();
+                                songTask.execute(uri);
                             }
-                            SongTask songTask = new SongTask();
-                            songTask.execute(uri);
+                            else {
+                                Toast.makeText(MainActivity.this, "Please type your query", Toast.LENGTH_LONG).show();
+                            }
 
                         }
                         else {
@@ -88,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // checks user connected to internet
     protected boolean isOnline(){
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -99,13 +110,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Async task for fetching datas in the background
     private class SongTask extends AsyncTask<String, ArrayList<DataModel>, ArrayList<DataModel>> {
 
         @Override
         protected void onPreExecute() {
 
             progressBar.setVisibility(View.VISIBLE);
-            Toast.makeText(MainActivity.this, "Searching songs", Toast.LENGTH_LONG);
         }
 
         @Override
@@ -114,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
             String searchResult = HttpManager.getData(params[0]);
             if (searchResult != null){
                 try {
+
+                    // creating JSON Object from the data
                     JSONObject jsonObject = new JSONObject(searchResult);
 //                    Getting JSON Array node
 
@@ -159,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        // presenting datas from the JSON object
         @Override
         protected void onPostExecute(ArrayList<DataModel> resultData) {
 
@@ -178,4 +192,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // destroys media player element when the app stops
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+    }
 }

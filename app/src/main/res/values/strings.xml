@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Song Search</string>
     <string name="search_hint">Search your song here</string>
-    <string name="button_play">&#xf01d;</string>
+    <string name="button_play">&#xf04b;</string>
+    <string name="button_stop">&#xf04d;</string>
     <string name="button_download">&#xf019;</string>
     <string name="icon_search">&#xf002;</string>
+    <string name="textview">TextView</string>
 </resources>
